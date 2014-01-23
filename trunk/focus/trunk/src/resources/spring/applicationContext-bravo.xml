@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"   
+    default-autowire="byName" default-lazy-init="true">   	
+    
+    <bean id="attachmentManager" class="com.cutty.bravo.components.common.manager.AttachmentManager" />
+    <bean id="deskTopConfigManager" class="com.cutty.bravo.components.common.manager.DeskTopConfigManager" />
+    <bean id="deskTopConfigResourceManager" class="com.cutty.bravo.components.common.manager.DeskTopConfigResourceManager" />
+    <bean id="enumerationManager" class="com.cutty.bravo.components.common.manager.EnumerationManager" />
+    <bean id="menuFunctionManager" class="com.cutty.bravo.components.common.manager.MenuFunctionManager" />
+    <bean id="newsManager" class="com.cutty.bravo.components.common.manager.NewsManager" />
+    <bean id="noticeManager" class="com.cutty.bravo.components.common.manager.NoticeManager" />
+    <bean id="profileMenuManager" class="com.cutty.bravo.components.common.manager.ProfileMenuManager" />
+    <bean id="systemInformationManager" class="com.cutty.bravo.components.common.manager.SystemInformationManager" />
+    <bean id="userCookieManager" class="com.cutty.bravo.components.common.manager.UserCookieManager" />
+    <bean id="mailUtil" class="com.cutty.bravo.components.communication.mail.util.MailUtil" />
+    <bean id="entityOperatePermissionRelationManager" class="com.cutty.bravo.core.security.manager.EntityOperatePermissionRelationManager" />
+    <bean id="permissionManager" class="com.cutty.bravo.core.security.manager.PermissionManager" />   
+    <bean id="resourceManager" class="com.cutty.bravo.core.security.manager.ResourceManager" />   
+    <bean id="userLoginLogManager" class="com.cutty.bravo.core.security.manager.UserLoginLogManager" />   
+    <bean id="userManager" class="com.cutty.bravo.core.security.manager.UserManager" />   
+</beans>
