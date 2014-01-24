@@ -157,6 +157,6 @@
 	<classpathentry kind="var" path="M2_REPO/org/tuckey/urlrewritefilter/3.1.0/urlrewritefilter-3.1.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/redis/clients/jedis/2.1.0/jedis-2.1.0.jar" sourcepath="M2_REPO/redis/clients/jedis/2.1.0/jedis-2.1.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/taglibs/standard/1.1.2/standard-1.1.2.jar" sourcepath="M2_REPO/taglibs/standard/1.1.2/standard-1.1.2-sources.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cutty-bravo.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cutty-bravo.jar" sourcepath="/cutty-bravo"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
