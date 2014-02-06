@@ -19,8 +19,11 @@
 				<@bravo.TextField fieldLabel="Hadoop安装路径" name="installPath" allowBlank="false" width="550" /> 
 			</@bravo.FieldSet>
 		</@bravo.FormPanel>
+
+<!--如果是名称节点-->
+<#if formValue.nodeType.id==27>
 		<@bravo.TabPanel activeTab="0" region="south" name="tab" height="250" collapsible="true">
-			<@bravo.GridPanel title="数据节点列表" name="dataNodeGrid" dataProxy="../node/hadoopNode!findAndRendJsonData.action?nameNode.id=%{formValue.id?c}"  contextDataName="users">	  
+			<@bravo.GridPanel title="数据节点列表" name="dataNodeGrid" dataProxy="./hadoopNode!findAndRendJsonData.action?nameNode.id=%{formValue.id?c}"  contextDataName="users">	  
 				<@bravo.Column  hidden="true" name="id" header="ID" width="10"  sortable="true" />
 			       <@bravo.Column  name="name" header="节点名"  width="175"  sortable="true" resizable="true"     />
 			       <@bravo.Column  name="hostName" header="计算机名" width="175"  sortable="true" resizable="true" />     
@@ -28,5 +31,6 @@
 				 <@bravo.Column name="nodeType.name" header="节点类型" width="175"  sortable="true"  resizable="true"     />
 			</@bravo.GridPanel>
 		</@bravo.TabPanel>
+</#if>
 	</@bravo.Viewport>
 </@bravo.Page>
