@@ -13,7 +13,8 @@
 		<@bravo.EditorGridPanel  region="center" tbar="Toodddlbar"  name="enumerationType_Grid"  contextDataName="enumerationTypes" dataProxy="./enumerationType!findAndRendJsonData.action" stripeRows="true"   collapsible="true" split="true">
 			<@bravo.Toolbar name="Toodddlbar" valign="top" defaults="{bodyStyle:'margin-top: 0px;padding:0px 0px 0px 0px'}" >
 				<@bravo.Button name="Add" text="新增" iconCls="add" handler="grid_doAdd(\\'enumerationType_Grid\\')"/>	
-				<@bravo.Button name="Save" text="保存" iconCls="save" handler="grid_doSave(\\'./enumerationType!batchSave.action\\',\\'enumerationType_Grid\\')"/>		<@bravo.Button text="删除" iconCls="delete" handler="grid_doDel(\\'./enumerationType!batchRemove.action\\',\\'enumerationType_Grid\\')"/>	
+				<@bravo.Button name="Save" text="保存" iconCls="save" handler="grid_doSave(\\'./enumerationType!batchSave.action\\',\\'enumerationType_Grid\\')"/>	
+				<@bravo.Button text="删除" iconCls="delete" handler="grid_doDel(\\'./enumerationType!batchRemove.action\\',\\'enumerationType_Grid\\')"/>	
 			</@bravo.Toolbar>               
 				<@bravo.Column dataIndex="id" hidden="true" name="id" header="ID" width="176"  sortable="true"  resizable="true"/>
 				<@bravo.Column dataIndex="name" name="name" header="名称"  width="175"  sortable="true" resizable="true">

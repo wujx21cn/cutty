@@ -14,9 +14,14 @@ Copyright (C) 2011 Cutty Corporation. All Rights Reserved.
  */
 package com.cutty.focus.server.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -24,7 +29,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 
+import com.cutty.bravo.components.common.domain.Enumeration;
 import com.cutty.bravo.core.domain.BaseDomain;
+import com.cutty.bravo.core.security.domain.Role;
 
 /**
  * 
@@ -44,11 +51,13 @@ public class ConfigItemTemplate extends BaseDomain {
 	private String comments;
 	private String code;
 	private String name;
-	private ConfigFileTemplate configFileId;
+	private ConfigFileTemplate configFileTemplate;
 
 	private String isFinal;
 	private String choosed;
 	private String defaultValue;
+
+	private Set<Enumeration> hadoopVersions;
 
 	public String getComments() {
 		return comments;
@@ -76,13 +85,13 @@ public class ConfigItemTemplate extends BaseDomain {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "config_file_id", referencedColumnName = "id")
-	public ConfigFileTemplate getConfigFileId() {
+	public ConfigFileTemplate getConfigFileTemplate() {
 
-		return configFileId;
+		return configFileTemplate;
 	}
 
-	public void setConfigFileId(ConfigFileTemplate configFileId) {
-		this.configFileId = configFileId;
+	public void setConfigFileTemplate(ConfigFileTemplate configFileTemplate) {
+		this.configFileTemplate = configFileTemplate;
 	}
 
 	@Column(name = "is_final")
@@ -110,4 +119,16 @@ public class ConfigItemTemplate extends BaseDomain {
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@JoinTable(name = "focus_template_hadoop_version", joinColumns = { @JoinColumn(name = "config_item_template_id") }, inverseJoinColumns = { @JoinColumn(name = "version_id") })
+	public Set<Enumeration> getHadoopVersions() {
+		return hadoopVersions;
+	}
+
+	public void setHadoopVersions(Set<Enumeration> hadoopVersions) {
+		this.hadoopVersions = hadoopVersions;
+	}
+	
+	
 }

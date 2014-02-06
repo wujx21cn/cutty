@@ -17,6 +17,9 @@ import com.cutty.focus.server.domain.HadoopNode;
 public class HadoopNodeAction  extends EntityAction<HadoopNode>{
 	private static final long serialVersionUID = 1877627696616089140L;
 
+	   public String queryDataNode() throws Exception {
+		   return "queryDataNode";
+	   }
 	   public String saveAndRendJsonData() throws Exception {
 		   StringBuffer validationMsg = new  StringBuffer();
 		   int errorCount = 1 ;
@@ -48,8 +51,6 @@ public class HadoopNodeAction  extends EntityAction<HadoopNode>{
 		   } else {
 			   return super.saveAndRendJsonData();
 		   }
-
-		   
 	   }
 
 

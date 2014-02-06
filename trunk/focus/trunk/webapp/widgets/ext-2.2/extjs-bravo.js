@@ -3,6 +3,8 @@
 /**
  * 提交form函数
  * Jason Wu....2008-9-2
+ *  History:
+ *   2008-09-25 kukuxia.hw 完善ajaxSubmitForm（）以及 submitForm（）
  */
 
 function ajaxSubmitForm(formName)
@@ -28,7 +30,7 @@ function ajaxSubmitForm(formName)
 	}
 }
 
- //Form的非Ajax提交方式 
+ //Form的非Ajax提交方式 2008-09-25 kukuxia.hw 
 function submitForm(formName){
     var formPanel = Ext.getCmp(formName); 
 	if(formPanel.form.isValid()){
@@ -1198,3 +1200,5 @@ function setDateFieldValue(dp,dateObj,divElement){
 				}
 		}
 	}
+
+
