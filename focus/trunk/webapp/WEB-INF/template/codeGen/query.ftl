@@ -8,7 +8,7 @@
 				<^bravo.FieldSet labelWidth="80"  cols="<#list listQueryPageGenDomains as listQueryPageGenDomain>1<#if listQueryPageGenDomain_has_next>;</#if></#list>" rows="<#list listQueryPageGenDomains as listQueryPageGenDomain>1<#if listQueryPageGenDomain_has_next>;</#if></#list>" >		
 					<#list listQueryPageGenDomains as listQueryPageGenDomain>
 					<#if listQueryPageGenDomain.fieldType == "ComboBox">
-					<^bravo.ComboBox fieldLabel="${listQueryPageGenDomain.labelName}" name="${listQueryPageGenDomain.fieldM2nRefField}" allowBlank="false" editable="false" dataProxy="${listQueryPageGenDomain.fieldM2nDataproxy}" displayField="${listQueryPageGenDomain.fieldM2nRefDisplay}" valueField="${listQueryPageGenDomain.fieldM2nRefValue}" />
+					<^bravo.ComboBox fieldLabel="${listQueryPageGenDomain.labelName}" name="${listQueryPageGenDomain.fieldM2nRefField}"  dataProxy="${listQueryPageGenDomain.fieldM2nDataproxy}" displayField="${listQueryPageGenDomain.fieldM2nRefDisplay}" valueField="${listQueryPageGenDomain.fieldM2nRefValue}" />
 					<#else>
 					<^bravo.${listQueryPageGenDomain.fieldType} fieldLabel="${listQueryPageGenDomain.labelName}" name="${listQueryPageGenDomain.fieldName}" width="165"/>
 					</#if>

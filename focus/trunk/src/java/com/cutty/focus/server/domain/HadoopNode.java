@@ -31,7 +31,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.cutty.bravo.components.common.domain.Enumeration;
 import com.cutty.bravo.core.domain.BaseDomain;
-import com.cutty.bravo.core.security.domain.User;
 
 /**
  *
