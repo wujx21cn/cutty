@@ -522,7 +522,7 @@ function m2mRemove(menuObj,orgID,entityName,fieldName,entityId){
 
 /**
  * PopuSelect选择按钮所触发的事件，该事件将弹出一查询窗口。
- * kukuxia.kevin.hw  2008-11-10
+ * Jason Wu  2008-11-10
 **/
 var parentPopuWin;//全局定义父页面打开的窗口
 
@@ -567,7 +567,7 @@ PopuSelectWinOpener = function() {
 
 /**
  * PopuSelect选择按钮所触发的事件，该事件将弹出一查询窗口。
- * kukuxia.kevin.hw  2008-11-11
+ * Jason Wu  2008-11-11
 **/
 function popuSelect(menuObj,name,targetGridName,valueField,displayField,hiddenName){
 	var gridBody = Ext.getCmp(targetGridName); 
@@ -627,7 +627,7 @@ newsTitle=title;
 
 /**
  * 更换页面的主题色彩
- * kukuxia.kevin.hw 2008-11-17
+ * Jason Wu 2008-11-17
  */
 function changeCss(name){
   var date = new Date();
@@ -929,7 +929,7 @@ function sessionExpired(){
 
 /**
  * Finereport导出报表，url中处理中日韩文必须的Encode方法
- * kukuxia.kevin.hw 2008-12-22
+ * Jason Wu 2008-12-22
  */
 function cjkEncode(text) {   
     if (text == null) {   

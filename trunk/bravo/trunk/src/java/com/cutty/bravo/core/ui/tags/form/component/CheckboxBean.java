@@ -1,7 +1,7 @@
-/**
- * kukuxia.hw
- */
+
 package com.cutty.bravo.core.ui.tags.form.component;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * <p> EXT标签Checkbox属性集合类 </p>
@@ -9,7 +9,6 @@ package com.cutty.bravo.core.ui.tags.form.component;
  * <a href="CheckboxBean.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin.hw</a>
  */
 public class CheckboxBean extends FieldBean {
 
@@ -35,6 +34,9 @@ public class CheckboxBean extends FieldBean {
 		this.boxLabel = boxLabel;
 	}
 	public String getChecked() {
+		if (StringUtils.isNotEmpty(this.getValue()) && this.getValue().equals(inputValue)) {
+			return "true" ;
+		} 
 		return checked;
 	}
 	public void setChecked(String checked) {

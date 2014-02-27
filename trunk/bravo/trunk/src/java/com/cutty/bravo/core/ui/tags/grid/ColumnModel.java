@@ -21,7 +21,7 @@ import com.cutty.bravo.core.ui.tags.grid.component.GridPanelBean;
  * <a href="ColumnModel.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:linjuan0125@gmail.com">Cathy Lin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 
 public class ColumnModel extends BaseTag {
@@ -56,7 +56,7 @@ public class ColumnModel extends BaseTag {
 	public int doEndTag() throws JspException {
 		if (StringUtils.isNotEmpty(this.getBodyContent().getString())){
 			ColumnModelBean component = (ColumnModelBean)this.getComponent();
-			//kukuxia.kevin.hw 2009-04-15 去掉column标签中bodyContent的回车换行符，否则页面会报"未结束字符串常量"错误。
+			//Jason Wu 2009-04-15 去掉column标签中bodyContent的回车换行符，否则页面会报"未结束字符串常量"错误。
 			component.setValue((StringUtils.trim(this.getBodyContent().getString())).replaceAll("[\\n\\r]",""));
 		}
 		return super.doEndTag();

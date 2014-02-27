@@ -21,7 +21,7 @@ package com.cutty.bravo.core.ui.tags.form.component;
  * <a href="TriggerFieldBean.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:linjuan0125@gmail.com">Cathy Lin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public class TriggerFieldBean extends TextFieldBean{
 	private static final long serialVersionUID = 8901107681028295760L;

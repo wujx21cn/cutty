@@ -45,6 +45,7 @@ import com.opensymphony.xwork2.ModelDriven;
  *
  * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
+
 public abstract class EntityAction<T> extends BaseActionSupport  implements ModelDriven  {
 
 	private static final long serialVersionUID = -7557820411455226124L;
@@ -151,6 +152,7 @@ public abstract class EntityAction<T> extends BaseActionSupport  implements Mode
 	 * @throws Exception
 	 */
 	public String query() throws Exception {
+		ServletActionContext.getRequest().setAttribute("formValue", model);
 		return QUERY;
 	}
 	/**
@@ -380,11 +382,13 @@ public abstract class EntityAction<T> extends BaseActionSupport  implements Mode
 	    		throw new Exception("you should pass the id Value of the model!!!\n你必须传入查询主键!!!");
 			}
 	    	model = baseDao.get(getEntityClass(),baseDao.getId(getEntityClass(),model));
+	    	
 	    	String contextDataName = ServletActionContext.getRequest().getParameter("contextDataName");
 			if (StringUtils.isEmpty(contextDataName)){
 				contextDataName = getEntityName();
 			}
 	    	ServletActionContext.getRequest().setAttribute(contextDataName,model);
+	    	ServletActionContext.getRequest().setAttribute("formValue",model);
 		} catch (Exception e) {
 			logger.error(e);
 			throw e; 
@@ -426,6 +430,7 @@ public abstract class EntityAction<T> extends BaseActionSupport  implements Mode
 			ServletActionContext.getRequest().setAttribute("contextDataName", contextDataName);
 		}
 		ServletActionContext.getRequest().setAttribute(contextDataName,page.getResult());
+		ServletActionContext.getRequest().setAttribute("listValue",page.getResult());
 		ServletActionContext.getRequest().setAttribute("totalCount",String.valueOf(page.getTotalCount()));
     }
 }

@@ -6,7 +6,7 @@
 	Description:
 		
 	History:
-		Nov 8, 2008 12:14:05 PM, Created kukuxia.kevin.hw
+		Nov 8, 2008 12:14:05 PM, Created Jason Wu
 }}IS_NOTE
 
 Copyright (C) 2008 Bravo Corporation. All Rights Reserved.
@@ -32,7 +32,7 @@ import com.cutty.bravo.core.ui.Constants;
  * <a href="AjaxHandleResponseRenderComponent.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public class AjaxHandleResponseRenderComponent implements DataRenderComponent {
 	private static final Log logger = LogFactory.getLog(AjaxHandleResponseRenderComponent.class);

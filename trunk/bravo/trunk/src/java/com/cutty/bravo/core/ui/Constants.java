@@ -20,7 +20,7 @@ package com.cutty.bravo.core.ui;
  * <a href="Constants.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public interface Constants {
 	//表单保存状态及返回信息 start------------------------------------------------------------------	

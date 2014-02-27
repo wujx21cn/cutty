@@ -7,7 +7,7 @@
 		
 	History:
 		2008-7-29 上午09:20:14, Created by Jason.Wu
-		2008-11-03 kukuxia.kevin.hw 获取当前系统时间
+		2008-11-03 Jason Wu 获取当前系统时间
 }}IS_NOTE
 
 Copyright (C) 2008 Bravo Corporation. All Rights Reserved.

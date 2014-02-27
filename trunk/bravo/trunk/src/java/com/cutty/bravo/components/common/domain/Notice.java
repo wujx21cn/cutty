@@ -39,7 +39,7 @@ import com.cutty.bravo.core.security.domain.User;
  * <a href="Notice.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">kukuxia.kevin</a>
  */
 @Entity
 @Table(name = "bravo_notice")

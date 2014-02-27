@@ -126,7 +126,7 @@ public class MenuFunctionAction  extends EntityAction<MenuFunction>{
 		return "jsonDataRenderChain";
 	}
 	
-	//查看人员权限树 kukuxia.kevin.hw 2008-11-07
+	//查看人员权限树 Jason Wu 2008-11-07
 	public String viewCheckedMenuTree(){
 		String node = ServletActionContext.getRequest().getParameter("node");
 		String permisId = ServletActionContext.getRequest().getParameter("permisId");
@@ -182,7 +182,7 @@ public class MenuFunctionAction  extends EntityAction<MenuFunction>{
 		return "jsonDataRenderChain";
 	}
 
-	//递归获得该节点的所有子节点 kukuxia.kevin.hw
+	//递归获得该节点的所有子节点 Jason Wu
 	public TreeNode getMenuChildren(TreeNode nodeValue, MenuFunction childMenuValue, List<String> menuKey) {
 		
 		if(menuFunctionManager.getChildForPermisMenuTree(childMenuValue.getId(),menuKey).size()==0)

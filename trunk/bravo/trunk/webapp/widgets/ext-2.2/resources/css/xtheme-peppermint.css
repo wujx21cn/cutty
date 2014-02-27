@@ -316,7 +316,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 .x-form-field-wrap .x-form-search-trigger{
     background-image: url(../images/peppermint/form/search-trigger.gif);
 }
-/** kukuxia.kevin.hw 去掉form的border设置 -_-! too ugly!
+/** Jason Wu 去掉form的border设置 -_-! too ugly!
 .x-form-text, textarea.x-form-field{
     border: 1px solid #ff0f0f;
 }

@@ -102,7 +102,7 @@ public class Toolbar extends BaseTag{
 
 	/**
 	 * 如果传递参数中带有POPU_TARGET_GRID等,则自动为toolBar新增一选择按钮,该按钮调用PopuSelect,具体见extjs-bravo.js
-	 * kukuxia.kevin.hw 2008-11-10
+	 * Jason Wu 2008-11-10
 	 */
 	private void renderPopuSelectButton(){
 		BaseTag parentTag = (BaseTag) TagSupport.findAncestorWithClass(this,BaseTag.class);

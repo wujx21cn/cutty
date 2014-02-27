@@ -6,7 +6,7 @@
 	Description:
 		
 	History:
-		Nov 10, 2008 11:11:49 AM, Created kukuxia.kevin.hw
+		Nov 10, 2008 11:11:49 AM, Created Jason Wu
 }}IS_NOTE
 
 Copyright (C) 2008 Bravo Corporation. All Rights Reserved.
@@ -20,7 +20,7 @@ package com.cutty.bravo.core.ui.tags.form.component;
  * <a href="PopuSelectBean.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public class PopuSelectBean extends TriggerFieldBean {
 

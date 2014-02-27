@@ -42,7 +42,7 @@ import com.cutty.bravo.core.web.handler.RequestHandler;
  * <a href="JasonGridPanelDataRenderComponent.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">kukuxia.hw</a>
  * History 
  *   2008-09-22 kukuxia.hw 实现页面上的分页显示。
  */

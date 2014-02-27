@@ -6,7 +6,7 @@
 	Description:
 		
 	History:
-		Nov 5, 2008 8:54:09 PM, Created kukuxia.kevin.hw
+		Nov 5, 2008 8:54:09 PM, Created Jason Wu
 }}IS_NOTE
 
 Copyright (C) 2008 Bravo Corporation. All Rights Reserved.
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * <a href="HtmlUtils.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public class HtmlUtils {
 	  private static final String[][] invokesForJs = {

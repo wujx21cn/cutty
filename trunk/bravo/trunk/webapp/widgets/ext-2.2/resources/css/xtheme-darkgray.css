@@ -289,7 +289,7 @@ color: #eee;
 .x-form-field-wrap .x-form-search-trigger{
     background-image: url(../images/darkgray/form/search-trigger.gif);
 }
-/** kukuxia.kevin.hw 去掉form的border设置 -_-! too ugly!
+/** Jason Wu 去掉form的border设置 -_-! too ugly!
 .x-form-text, textarea.x-form-field{
     border: 1px solid #a5a5a5;
 }

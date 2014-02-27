@@ -20,7 +20,7 @@ package com.cutty.bravo.core.ui.tags.form.component;
  * <a href="ItemSelectorBean.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">kukuxia.hw</a>
  */
 public class ItemSelectorBean extends FieldBean {
 

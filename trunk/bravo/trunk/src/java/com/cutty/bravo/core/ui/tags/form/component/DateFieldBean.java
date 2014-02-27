@@ -20,7 +20,7 @@ package com.cutty.bravo.core.ui.tags.form.component;
  * <a href="DateFieldBean.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:linjuan0125@gmail.com">Cathy.Lin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Cathy.Lin</a>
  */
 public class DateFieldBean extends TriggerFieldBean{
 
