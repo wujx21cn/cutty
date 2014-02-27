@@ -16,16 +16,14 @@ package com.cutty.focus.server.web;
 
 import java.util.List;
 
-import org.apache.cxf.common.util.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
-import com.cutty.bravo.components.common.domain.News;
 import com.cutty.bravo.core.ui.Constants;
 import com.cutty.bravo.core.web.struts2.EntityAction;
 import com.cutty.focus.server.domain.ConfigFile;
-import com.cutty.focus.server.domain.ConfigItemTemplate;
+import com.cutty.focus.server.manager.ConfigItemManager;
 
 /**
  * 
@@ -42,6 +40,8 @@ public class ConfigFileAction extends EntityAction<ConfigFile> {
 	/**
 	 * 
 	 */
+	
+	private ConfigItemManager configItemManager;
 	private static final long serialVersionUID = -4149356562429703760L;
 
 	public String saveConfigFileAndRendJsonData() throws Exception {
@@ -70,7 +70,15 @@ public class ConfigFileAction extends EntityAction<ConfigFile> {
 					Constants.FORM_AJAX_SUBMIT_MSG, validationMsg.toString());
 			return JSON_DATA_RENDER_CHAIN;
 		} else {
-			return super.saveAndRendJsonData();
+			String retVal =super.saveAndRendJsonData();
+			configItemManager.addDefaultConfigItem(model);
+			return retVal;
 		}
 	}
+
+	public void setConfigItemManager(ConfigItemManager configItemManager) {
+		this.configItemManager = configItemManager;
+	}
+	
+	
 }

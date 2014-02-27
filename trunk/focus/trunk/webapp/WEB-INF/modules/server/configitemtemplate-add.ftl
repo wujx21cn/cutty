@@ -8,8 +8,8 @@
 					<@bravo.TextField fieldLabel="名称" name="name" width="200" allowBlank="false" />
 					<@bravo.TextField fieldLabel="编码" name="code" width="200" allowBlank="false" />
 					<@bravo.ComboBox fieldLabel="所属配置文件" name="configFileTemplate.id" allowBlank="false" editable="false" dataProxy="hql[from ConfigFileTemplate]" displayField="name" valueField="id" />
-					<@bravo.Checkbox fieldLabel="是否final" name="isFinal" width="165" inputValue="1"/>
-					<@bravo.Checkbox fieldLabel="是否默选" name="choosed" width="165" inputValue="1"/>
+					<@bravo.Checkbox fieldLabel="是否final" name="finalled" width="165" inputValue="true" value="%{formVaue.finalled}"/>
+					<@bravo.Checkbox fieldLabel="是否默选" name="choosed" width="165" inputValue="true" value="%{formVaue.choosed}"/>
 					<@bravo.TextField fieldLabel="默认值" name="defaultValue" width="165"/>
 					<@bravo.TextArea fieldLabel="描述" name="comments" width="600" height="120"/>i
 			</@bravo.FieldSet>

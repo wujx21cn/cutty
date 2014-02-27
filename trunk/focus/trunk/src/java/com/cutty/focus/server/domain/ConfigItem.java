@@ -44,11 +44,11 @@ public class ConfigItem extends BaseDomain {
 	
 	private static final long serialVersionUID = 1L;
 	private String value;
-	private ConfigItemTemplate configItemTemplateId;
+	private ConfigItemTemplate configItemTemplate;
 	
-	private ConfigFile configFileId;
+	private ConfigFile configFile;
 	
-	private String isFinal;
+	private boolean finalled;
 
 	
 	public String getValue() {
@@ -59,28 +59,28 @@ public void setValue(String value) {
 	}
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "config_item_template_id",referencedColumnName="id")
-	public ConfigItemTemplate getConfigItemTemplateId() {
+	public ConfigItemTemplate getConfigItemTemplate() {
 
-		return configItemTemplateId;
+		return configItemTemplate;
 	}
-	public void setConfigItemTemplateId(ConfigItemTemplate configItemTemplateId) {
-			this.configItemTemplateId = configItemTemplateId;
+	public void setConfigItemTemplate(ConfigItemTemplate configItemTemplate) {
+			this.configItemTemplate = configItemTemplate;
 	}
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "config_file_id",referencedColumnName="id")
-	public ConfigFile getConfigFileId() {
+	public ConfigFile getConfigFile() {
 
-		return configFileId;
+		return configFile;
 	}
-	public void setConfigFileId(ConfigFile configFileId) {
-			this.configFileId = configFileId;
+	public void setConfigFile(ConfigFile configFile) {
+			this.configFile = configFile;
 	}
-	@Column(name = "is_final")
-	public String getIsFinal() {
-		return isFinal;
+	public boolean isFinalled() {
+		return finalled;
 	}
-public void setIsFinal(String isFinal) {
-		this.isFinal = isFinal;
+	public void setFinalled(boolean finalled) {
+		this.finalled = finalled;
 	}
+
 }
 

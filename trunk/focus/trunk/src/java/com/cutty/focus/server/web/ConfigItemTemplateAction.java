@@ -67,5 +67,6 @@ public class ConfigItemTemplateAction extends EntityAction<ConfigItemTemplate> {
 		ServletActionContext.getRequest().setAttribute("totalCount",String.valueOf(configItemTemplateList.size()));
     	return "jsonDataRenderChain";
     }
+
 }
 

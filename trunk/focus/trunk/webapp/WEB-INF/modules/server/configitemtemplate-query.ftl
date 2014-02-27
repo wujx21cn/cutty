@@ -12,7 +12,7 @@
 				</@bravo.FieldSet>
 			 </@bravo.FormPanel>    
 
-			 <@bravo.GridPanel  region="center" tbar="Toodddlbar" name="configItemTemplateGrid"  contextDataName="configItemTemplates"   dataProxy="./configItemTemplate!findAndRendJsonData.action"  collapsible="true" split="true" stripeRows="true" >
+			 <@bravo.GridPanel  region="center" tbar="Toodddlbar" name="configItemTemplateGrid"  contextDataName="configItemTemplates"   dataProxy="./configItemTemplate!findAndRendJsonData.action?configFileTemplate.id=%{formValue.configFileTemplate.id} "  collapsible="true" split="true" stripeRows="true" >
 			     <@bravo.Toolbar name="Toodddlbar" valign="top" >
 				 <@bravo.Button name="Add" text="新增" iconCls="add" handler="gridOpenNewWin(\\'./configItemTemplate!add.action\\',\\'新增\\',\\'configItemTemplateGrid\\')"/>
 				 <@bravo.Button name="Delete" text="删除" iconCls="delete" handler="grid_doDel(\\'./configItemTemplate!batchRemove.action\\',\\'configItemTemplateGrid\\')"/>

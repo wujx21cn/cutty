@@ -25,7 +25,7 @@
 
 	</#if><#if component.autoCreate?exists>,autoCreate:'${component.autoCreate}'
 	</#if><#if component.boxLabel?exists>,boxLabel:'${component.boxLabel}'
-	</#if><#if component.checked?exists>,checked:${component.checked}
+	</#if><#if component.checked?exists>,checked:<#if  component.checked??>false<#else>${component.checked}</#if>
 	</#if><#if component.fieldClass?exists>,fieldClass:'${component.fieldClass}'
 	</#if><#if component.focusClass?exists>,focusClass:'${component.focusClass}'
 	</#if><#if component.inputValue?exists>,inputValue:'${component.inputValue}'

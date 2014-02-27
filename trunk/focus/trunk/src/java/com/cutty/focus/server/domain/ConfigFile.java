@@ -15,15 +15,18 @@ Copyright (C) 2011 Cutty Corporation. All Rights Reserved.
 package com.cutty.focus.server.domain;
 
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.cutty.focus.server.domain.HadoopCluster;
 import javax.persistence.ManyToOne;
-import com.cutty.focus.server.domain.ConfigItemTemplate;
 import javax.persistence.JoinColumn;
 
 import com.cutty.bravo.core.domain.BaseDomain;
@@ -45,8 +48,8 @@ public class ConfigFile extends BaseDomain {
 	private ConfigFileTemplate configFileTemplate;
 	private HadoopCluster hadoopCluster;
 	private String location;
-	
-
+	private Set<ConfigItem> configItems;
+ 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "config_file_template_id",referencedColumnName="id")
 	public ConfigFileTemplate getConfigFileTemplate() {
@@ -70,6 +73,14 @@ public class ConfigFile extends BaseDomain {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	@OneToMany(mappedBy = "configFile", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ConfigItem.class)
+	public Set<ConfigItem> getConfigItems() {
+		return configItems;
+	}
+	public void setConfigItems(Set<ConfigItem> configItems) {
+		this.configItems = configItems;
 	}
 	
 	

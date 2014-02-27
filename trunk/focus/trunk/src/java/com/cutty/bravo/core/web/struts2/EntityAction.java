@@ -151,6 +151,7 @@ public abstract class EntityAction<T> extends BaseActionSupport  implements Mode
 	 * @throws Exception
 	 */
 	public String query() throws Exception {
+		ServletActionContext.getRequest().setAttribute("formValue", model);
 		return QUERY;
 	}
 	/**
@@ -214,6 +215,7 @@ public abstract class EntityAction<T> extends BaseActionSupport  implements Mode
     			saveEntity = model;
     		}
     		baseDao.save(saveEntity);
+    		model = saveEntity;
 		} catch (Exception e) {
 			logger.error(e);
 			throw e; 

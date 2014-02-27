@@ -14,6 +14,8 @@ Copyright (C) 2011 Cutty Corporation. All Rights Reserved.
 */
 package com.cutty.focus.server.manager;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cutty.bravo.core.manager.BaseManager;
@@ -29,6 +31,7 @@ import com.cutty.focus.server.domain.ConfigItemTemplate;
 
 @Service("configItemTemplateManager")
 public class ConfigItemTemplateManager extends BaseManager<ConfigItemTemplate>{
+
 
 }
 

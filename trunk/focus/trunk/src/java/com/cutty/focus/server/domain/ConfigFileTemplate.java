@@ -14,7 +14,12 @@ Copyright (C) 2011 Cutty Corporation. All Rights Reserved.
  */
 package com.cutty.focus.server.domain;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -34,10 +39,11 @@ import com.cutty.bravo.core.domain.BaseDomain;
 @Table(name = "focus_config_file_template")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ConfigFileTemplate extends BaseDomain {
-
+	private static final long serialVersionUID = -5354809565294937244L;
 	private String location;
 	private String comments;
 	private String name;
+	private Set<ConfigItemTemplate> configItemTemplates;
 
 	public String getLocation() {
 		return location;
@@ -62,4 +68,16 @@ public class ConfigFileTemplate extends BaseDomain {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	@OneToMany(mappedBy = "configFileTemplate", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ConfigItemTemplate.class)
+	public Set<ConfigItemTemplate> getConfigItemTemplates() {
+		return configItemTemplates;
+	}
+
+	public void setConfigItemTemplates(Set<ConfigItemTemplate> configItemTemplates) {
+		this.configItemTemplates = configItemTemplates;
+	}
+	
+	
 }

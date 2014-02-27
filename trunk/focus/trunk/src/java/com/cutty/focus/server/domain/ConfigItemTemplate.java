@@ -53,8 +53,8 @@ public class ConfigItemTemplate extends BaseDomain {
 	private String name;
 	private ConfigFileTemplate configFileTemplate;
 
-	private String isFinal;
-	private String choosed;
+	private boolean finalled;
+	private boolean choosed;
 	private String defaultValue;
 
 	private Set<Enumeration> hadoopVersions;
@@ -94,20 +94,21 @@ public class ConfigItemTemplate extends BaseDomain {
 		this.configFileTemplate = configFileTemplate;
 	}
 
-	@Column(name = "is_final")
-	public String getIsFinal() {
-		return isFinal;
+
+
+	public boolean isFinalled() {
+		return finalled;
 	}
 
-	public void setIsFinal(String isFinal) {
-		this.isFinal = isFinal;
+	public void setFinalled(boolean finalled) {
+		this.finalled = finalled;
 	}
 
-	public String getChoosed() {
+	public boolean isChoosed() {
 		return choosed;
 	}
 
-	public void setChoosed(String choosed) {
+	public void setChoosed(boolean choosed) {
 		this.choosed = choosed;
 	}
 
