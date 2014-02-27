@@ -19,12 +19,14 @@ Copyright (C) 2008 Bravo Corporation. All Rights Reserved.
 package com.cutty.bravo.core.ui.tags.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.cutty.bravo.core.dao.BaseDao;
 import com.cutty.bravo.core.ui.tags.BaseTag;
@@ -39,7 +41,7 @@ import com.cutty.bravo.core.utils.ApplicationContextKeeper;
  * <a href="ComboBox.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:linjuan0125@gmail.com">Cathy Lin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public class ComboBox extends TriggerField{
 
@@ -74,9 +76,15 @@ public class ComboBox extends TriggerField{
 		
 		String dataProxy = comboBoxBean.getDataProxy();
 		List dataList = null; 
-		if (dataProxy!=null && dataProxy.indexOf("hql[") > -1){
-			String sql = dataProxy.substring(4, dataProxy.length()-1);
-			 dataList = baseDao.find(null, sql,true);
+		if (dataProxy!=null){
+			if (dataProxy.indexOf("hql[") > -1){
+				String sql = dataProxy.substring(4, dataProxy.length()-1);
+				 dataList = baseDao.find(null, sql,true);
+			} else if (dataProxy.indexOf("list[") > -1){
+				String listName = dataProxy.substring(5, dataProxy.length()-1);
+				dataList = (List)super.getWebContent().get(StringUtils.trim(listName));
+			} 
+			if (null == dataList) dataList = new ArrayList();
 			java.util.Iterator dataIterator =  dataList.iterator();
 			while (dataIterator.hasNext()){
 				Object value = dataIterator.next();

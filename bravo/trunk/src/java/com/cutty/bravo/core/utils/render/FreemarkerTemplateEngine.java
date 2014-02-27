@@ -231,7 +231,7 @@ public class FreemarkerTemplateEngine {
 		return str;
 	}
 
-    //2008-11-02 kukuxia.kevin.hw 将*号转换成一个没有特殊意义的"#-#"
+    //2008-11-02 Jason Wu 将*号转换成一个没有特殊意义的"#-#"
 	public String encodeRegex(String str) {
 	       if(str.indexOf("regex") >= 0){
 			if (str.indexOf("*") >= 0)
@@ -239,7 +239,7 @@ public class FreemarkerTemplateEngine {
 	       }
 			return str;
 		}
-	//2008-11-02 kukuxia.kevin.hw 将没有特殊意义的"#-#"转换成"*"号
+	//2008-11-02 Jason Wu 将没有特殊意义的"#-#"转换成"*"号
 	public String decodeRegex(String str) {
        if(str.indexOf("regex") >= 0){
 		if (str.indexOf("#-#") >= 0)

@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="JasonComboBoxDataRenderComponent.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">kukuxia.hw</a>
  */
 public class JasonComboBoxDataRenderComponent implements DataRenderComponent {
 	private static final Log logger = LogFactory.getLog(JasonComboBoxDataRenderComponent.class);

@@ -280,7 +280,7 @@
    ;
 /*-- Okid --*/
 /**
- * kukuxia.kevin.hw 2008-12-15
+ * Jason Wu 2008-12-15
  */
 function isValid(node){
 	  var taskElementList = node.getElementsByTagName('Task_Node');

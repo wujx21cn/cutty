@@ -483,7 +483,7 @@ function exportExcel(export_grid_Name){
 	 });
   }
 
-//kukuxia.kevin.hw 2009-04-20 解决bravo页面在没有form标签只有grid标签的情况下无法导出
+//Jason Wu 2009-04-20 解决bravo页面在没有form标签只有grid标签的情况下无法导出
  function downloadFile(fileName,contentType){
 	 //当Grid所在页面没有form，新建form标签
 	 if(document.forms[0]==undefined){

@@ -6,7 +6,7 @@
 	Description:
 		
 	History:
-		Nov 4, 2008 11:11:11 PM, Created kukuxia.kevin.hw
+		Nov 4, 2008 11:11:11 PM, Created Jason Wu
 }}IS_NOTE
 
 Copyright (C) 2008 Bravo Corporation. All Rights Reserved.
@@ -33,7 +33,7 @@ import com.cutty.bravo.core.ui.tags.tree.TreeNode;
  * <a href="JasonCheckedTreeDataRenderComponent.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin.hw</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 public class JasonCheckedTreeDataRenderComponent implements DataRenderComponent {
 	private static final Log logger = LogFactory.getLog(JasonCheckedTreeDataRenderComponent.class);
@@ -83,7 +83,7 @@ public class JasonCheckedTreeDataRenderComponent implements DataRenderComponent 
 		    			jsonDataSB.append("\"iconCls\":\"").append(treeNode.getIconCls()).append("\",");
 		    		}	    		
 		    		if (StringUtils.isNotEmpty(treeNode.getLeaf())){
-		    			jsonDataSB.append("\"leaf\":\"").append(treeNode.getLeaf()).append("\",");
+		    			jsonDataSB.append("\"leaf\":").append(treeNode.getLeaf()).append(",");
 		    		}
 		    		if (StringUtils.isNotEmpty(treeNode.getExpanded())){
 		    			jsonDataSB.append("\"expanded\":").append(treeNode.getExpanded()).append(",");

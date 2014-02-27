@@ -15,11 +15,13 @@ Copyright (C) 2008 Bravo Corporation. All Rights Reserved.
 package com.cutty.bravo.core.ui.tags.form;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.cutty.bravo.core.dao.BaseDao;
 import com.cutty.bravo.core.ui.tags.form.component.ItemSelectorBean;
@@ -31,7 +33,6 @@ import com.cutty.bravo.core.utils.ApplicationContextKeeper;
  * <a href="ItemSelector.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.hw</a>
  */
 public class ItemSelector extends Field {
 
@@ -47,9 +48,17 @@ public class ItemSelector extends Field {
 	BaseDao baseDao= (BaseDao)ApplicationContextKeeper.getAppCtx().getBean("baseDao");
 	ItemSelectorBean itemSelectorBean = (ItemSelectorBean)this.getComponent();
 	String dataProxy = itemSelectorBean.getDataProxy();
-	if ( dataProxy.indexOf("hql[") > -1){
-		String sql = dataProxy.substring(4, dataProxy.length()-1);
-		List dataList = baseDao.find(null, sql,true);
+	List dataList=null;
+	if (dataProxy  != null){
+		if ( dataProxy.indexOf("hql[") > -1) {
+			String sql = dataProxy.substring(4, dataProxy.length()-1);
+			dataList = baseDao.find(null, sql,true);
+		} else if ( dataProxy.indexOf("list[") > -1){
+			String listName = dataProxy.substring(5, dataProxy.length()-1);
+			dataList = (List)super.getWebContent().get(StringUtils.trim(listName));
+		}
+		if (null == dataList) dataList = new ArrayList();
+		
 		java.util.Iterator dataIterator = dataList.iterator();
 		while (dataIterator.hasNext()){
 			Object value = dataIterator.next();

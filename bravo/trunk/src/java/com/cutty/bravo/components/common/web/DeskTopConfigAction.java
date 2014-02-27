@@ -205,7 +205,7 @@ public class DeskTopConfigAction  extends EntityAction<DeskTopConfig>{
 		ServletActionContext.getRequest().setAttribute("treeData",treeList);
 	}
 
-	//递归获得该节点的所有子节点 kukuxia.kevin.hw
+	//递归获得该节点的所有子节点 Jason Wu
 	private TreeNode getMenuChildren(TreeNode nodeValue, MenuFunction childMenuValue, List<String> menuKey) {
 		
 		if(getChildAndSetCheck(childMenuValue.getId(),menuKey).size()==0)

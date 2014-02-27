@@ -8,7 +8,7 @@ package com.cutty.bravo.core.ui.tags.grid;
  * <a href="EditorGridPanel.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:linjuan0125@gmail.com">Cathy Lin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">Jason Wu</a>
  */
 
 

@@ -38,7 +38,7 @@ import com.cutty.bravo.core.web.struts2.EntityAction;
  * <a href="AttachmentAction.java.html"><i>View Source</i></a>
  * </p>
  *
- * @author <a href="mailto:huangw100@126.com">kukuxia.kevin</a>
+ * @author <a href="mailto:wujx21cn@gmail.com">kukuxia.kevin</a>
  */
 @Namespace("/common")   
 @ParentPackage("bravo")

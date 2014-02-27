@@ -64,7 +64,7 @@ public class PanelBean extends Container{
 	private String title; 
 	private String titleCollapse; 
 	private String tools; 
-	//kukuxia.kevin.hw 2008-11-08
+	//Jason Wu 2008-11-08
 	//使该控件在viewPort的layout=border的布局下可以使实现拖拉（继承于Panel的子类控件，例如TablePanel,FormPanel,TreePanel,FieldSet,GridPanel.....皆可）
 	private String split; 
 	

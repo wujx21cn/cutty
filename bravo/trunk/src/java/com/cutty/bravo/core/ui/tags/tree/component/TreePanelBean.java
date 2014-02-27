@@ -57,7 +57,7 @@ public class TreePanelBean extends PanelBean{
 	private String nodeId;
 	private String contextData;
 	
-	//2008-11-04 kukuxia.kevin.hw 扩展的带checkbox的树
+	//2008-11-04 Jason Wu 扩展的带checkbox的树
 	private String checkModel;
 	private String onlyLeafCheckable;
 	private String checkTreeDataProxy;
