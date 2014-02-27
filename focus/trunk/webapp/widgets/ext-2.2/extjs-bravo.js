@@ -1,10 +1,8 @@
-﻿Ext.BLANK_IMAGE_URL = "../widgets/ext-2.2/resources/images/default/s.gif"; 
+Ext.BLANK_IMAGE_URL = "../widgets/ext-2.2/resources/images/default/s.gif"; 
 
 /**
  * 提交form函数
  * Jason Wu....2008-9-2
- *  History:
- *   2008-09-25 kukuxia.hw 完善ajaxSubmitForm（）以及 submitForm（）
  */
 
 function ajaxSubmitForm(formName)
@@ -184,6 +182,7 @@ function gridOpenNewWin(url,title,grid){
 			if(title.length<1)
 				title = '查看窗口'+i;
 			var tabs = new Ext.Panel({
+					id: 'subTab11111',
 					region: 'center',
 					margins:'3 3 3 0', 
 					defaults:{autoScroll:true},
@@ -1202,3 +1201,48 @@ function setDateFieldValue(dp,dateObj,divElement){
 	}
 
 
+function gridOpenNewWinWithId(winId,url,title,grid){
+	var isFistRestore=0;
+	var html = "<iframe id='frmForm' name='frmForm' src='"+url+"' width='100%' height='100%'></iframe>";
+	var fatherStyle = Ext.getBody();
+	var gridBody = Ext.getCmp(grid);
+	var bodyWidth =  fatherStyle.getComputedWidth();
+	if(Ext.getCmp(winId)) {
+			Ext.getCmp(winId).show();
+			return;
+	}
+	if(title.length<1)
+		title = '查看窗口'+i;
+
+	var tabs = new Ext.Panel({
+			id:'subTab',
+			region: 'center',
+			margins:'3 3 3 0', 
+			defaults:{autoScroll:true},
+			html: html
+		});
+	win = new Ext.Window({
+		title:title,
+		closable:true,
+		maximizable:true,
+		border:false,
+		plain:true,
+		//modal:true,
+		id:winId,
+		constrain :true,
+		layout: 'border',
+		items: [tabs]
+	});
+	win.show(fatherStyle);
+	win.maximize(); 
+	win.on('restore', function(){
+		if(isFistRestore==0)
+		{
+			win.setPosition(bodyWidth-i*30-30,0);
+			isFistRestore=1;
+		}
+	});	
+	win.on('close', function(){
+		gridBody.getStore().reload();
+	});		
+}

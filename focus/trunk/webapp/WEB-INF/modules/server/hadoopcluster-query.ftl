@@ -22,7 +22,7 @@
 				    <@bravo.Column  name="hadoopVersion.name" header="版本号"  width="175"  sortable="true" resizable="true" />
 				    <@bravo.Column  name="nameNode.name" header="名称节点"  width="175"  sortable="true" resizable="true" />
 				<@bravo.Column name="view" header="查看" sortable="true" >
-			         <a href=\'javascript:gridOpenNewWin(\\"./hadoopCluster!view.action?id=@{rowValue.id?c}\\",\\"查看hadoopCluster[@{rowValue.id}]\\",\\"hadoopClusterGrid\\")\' style=\\"TEXT-DECORATION:none\\"><span style=color:red;>查看</span></a>
+			         <a href=\'javascript:gridOpenNewWinWithId(\\"hadoopViewWin@{rowValue.id?c}\\",\\"./hadoopCluster!view.action?id=@{rowValue.id?c}\\",\\"查看hadoopCluster[@{rowValue.id}]\\",\\"hadoopClusterGrid\\")\' style=\\"TEXT-DECORATION:none\\"><span style=color:red;>查看</span></a>
 			     </@bravo.Column>			   
 	                </@bravo.GridPanel>
     </@bravo.Viewport>

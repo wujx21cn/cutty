@@ -34,19 +34,20 @@
 		<@bravo.Panel      title="快捷菜单"                region="west"              border="false" draggable="false" autoLoad="../common/profileMenu!viewProfileMenu.action"/>
 		<@bravo.TreePanel  title="工作导航" text="工作导航" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10003" />
 		<@bravo.TreePanel  title="Hadoop集群管理" text="Hadoop集群管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10002" />
+		<@bravo.TreePanel  title="Hadoop文件管理" text="Hadoop文件管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../hdfs/filesTree!getClusterTree.action" contextData="treeData"  nodeId="10007"/>
 		<@bravo.TreePanel  title="系统管理" text="系统管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10001" />
 		<@bravo.TreePanel  title="数据统计" text="数据统计" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10004" />
     </@bravo.Panel>
 	<@bravo.TabPanel name="deskPanel" region="center" deferredRender="false" activeTab="0"> 
 		<@bravo.Portal  region="center" margins="35 5 5 0" name="center" title="我的桌面"> 
 			<@bravo.PortalColumn columnWidth=".33" name="portal1" title="portal1" style="padding:10px 0 10px 10px"> 
-				<@bravo.Portlet autoLoad="../report/transparentPieChart!chart.action" title="产品成本分布图"/> 
+				<@bravo.Portlet autoLoad="../common/notice!viewNotice.action" title="产品成本分布图"/> 
 			</@bravo.PortalColumn>
 			<@bravo.PortalColumn columnWidth=".33" title="portal2" style="padding:10px 0 10px 10px"> 
-				<@bravo.Portlet autoLoad="../report/cylinderBarChart!chart.action"  name="portal21" title="服务器本周负载明细"/> 
+				<@bravo.Portlet autoLoad="../common/notice!viewNotice.action"  name="portal21" title="服务器本周负载明细"/> 
 			</@bravo.PortalColumn>
 			<@bravo.PortalColumn columnWidth=".33" title="portal3" style="padding:10px 0 10px 10px"> 
-				<@bravo.Portlet autoLoad="../report/depthAreaChart!chart.action" title="当日网络负载明细"/> 
+				<@bravo.Portlet autoLoad="../common/notice!viewNotice.action" title="当日网络负载明细"/> 
 			</@bravo.PortalColumn>
 			<@bravo.PortalColumn height="130" columnWidth=".33" title="porta21" style="padding:10px 0 10px 10px"> 
 				<@bravo.Portlet height="120" autoLoad="../common/news!viewNews.action" title="新闻"/> 

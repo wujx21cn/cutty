@@ -1,6 +1,6 @@
-<@bravo.Page name="hadoopCluster_add" title="新增Hadoop集群">
+<@bravo.Page name="hadoopCluster_add" title="Hadoop集群">
 	<@bravo.Viewport  layout="border">
-		<@bravo.FormPanel name="hadoopClusterAddForm" region="center" border="false" width="800" tbar="toolBar"  dataProxy="./hadoopCluster!saveAndRendJsonData.action">  
+		<@bravo.FormPanel name="hadoopClusterViewForm" region="center" border="false" width="800" tbar="toolBar"  dataProxy="./hadoopCluster!saveAndRendJsonData.action">  
 			<@bravo.Toolbar name="toolBar" valign="bottom">
 				<@bravo.Button name="Save" tooltip="'保存'" text="保存" iconCls="add" handler="ajaxSubmitForm(\\'hadoopClusterAddForm\\')"/>
 			<#if notToBeAddedFileTemplates == "false">
@@ -34,8 +34,8 @@
 
 			<@bravo.GridPanel title="配置[${existConfigFile.configFileTemplate.name}]" tbar="configFileToolBar_${existConfigFile_index}" name="configFileGrid_${existConfigFile_index}" dataProxy="./user!findAndRendJsonData.action?roles.id=%{formValue.id?c}"  contextDataName="Users">
 					<@bravo.Toolbar name="configFileToolBar_${existConfigFile_index}" valign="top">
-						<@bravo.M2MSelectButton text="选择添加人员" iconCls="add" targetProxy="./user!query.action" targetGridName="user_Grid" originGridName="roleUserGrid" entityName="Role" fieldName="users" entityId="%{formValue.id?c}"/>
-						<@bravo.M2MRemoveButton text="删除人员" iconCls="delete" originGridName="roleUserGrid" entityName="Role" fieldName="users" entityId="%{formValue.id?c}"/>
+						<@bravo.M2MSelectButton text="选择添加配置项" iconCls="add" targetProxy="./configItemTemplate!query.action?configFileTemplate.id=${existConfigFile.configFileTemplate.id}" targetGridName="configFileGrid_${existConfigFile_index}" originGridName="configItemTemplateGrid" entityName="ConfigFile" fieldName="configItems" entityId="%{formValue.id?c}"/>
+						<@bravo.M2MRemoveButton text="删除配置项" iconCls="delete" originGridName="roleUserGrid" entityName="Role" fieldName="users" entityId="%{formValue.id?c}"/>
 					</@bravo.Toolbar>			  
 					<@bravo.Column hidden="true" name="id" header="ID" width="0"  sortable="true"  resizable="true"     />
 					<@bravo.Column  name="loginid" header="登陆名"  width="175"  sortable="true" resizable="true"     />
@@ -53,6 +53,7 @@
 
 <script language="javascript">
 function openNewWin(winId,url,title){
+var currentHadoopCluster = parent.Ext.getCmp('hadoopViewWin#{formValue.id}');
 var html = "<iframe id='frmForm' name='frmForm' src='"+url+"' width='100%' height='100%'></iframe>";	
 newsTitle=title;
 			var tabs = new Ext.Panel({
@@ -61,7 +62,6 @@ newsTitle=title;
 					defaults:{autoScroll:true},
 					html: html
 				});
-           //如果在第一个窗口还存在的情况下，要打开第二个窗口，则先关闭第一个窗口
 			if(Ext.getCmp(winId)!=undefined){
 				Ext.getCmp(winId).close();
 			}
@@ -82,7 +82,7 @@ newsTitle=title;
 			});
 			win.show();	
 			win.on('close', function(){
-				alert('close the window');
+				currentHadoopCluster.items.itemAt(0).body.update('<iframe scrolling="auto"   frameborder="0" width="100%" height="100%"   src="./hadoopCluster!view.action?id=#{formValue.id}"></iframe>');    
 			});	
 }
 
