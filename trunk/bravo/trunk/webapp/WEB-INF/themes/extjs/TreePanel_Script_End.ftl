@@ -82,6 +82,7 @@
 		</#if><#if component.rootVisible?exists>,rootVisible:${component.rootVisible}
 		</#if><#if component.selModel?exists>,selModel:${component.selModel}
 		</#if><#if component.singleExpand?exists>,singleExpand:${component.singleExpand}
+		</#if><#if component.expand?exists>,expand :${component.expand}
 		</#if><#if component.containerScroll?exists>,containerScroll:${component.containerScroll}</#if> 
                 <#if component.dataProxy?exists>,loader: new Ext.tree.TreeLoader({dataUrl:'${component.dataProxy}'
 		,baseParams :{contextDataName:'${component.contextData}',jsonTreeData:'Y'} 

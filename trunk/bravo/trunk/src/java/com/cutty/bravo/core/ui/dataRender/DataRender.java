@@ -35,6 +35,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.cutty.bravo.core.ConfigurableConstants;
+
 
 /**
  * <p> 根据DataRender.xml配置调用对应的json渲染器 </p>
@@ -57,7 +59,7 @@ public class DataRender {
 	private DataRender(){
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = null;
-		InputStream configStream = this.getClass().getResourceAsStream("DataRender.xml");
+		InputStream configStream = this.getClass().getResourceAsStream(ConfigurableConstants.getProperty("ui.dataRender.config.path","/com/cutty/bravo/core/ui/dataRender/DataRender.xml"));
 		try {
 			db = dbf.newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
