@@ -34,6 +34,7 @@ import com.cutty.focus.server.domain.HadoopNode;
 import javax.persistence.JoinColumn;
 
 import com.cutty.bravo.core.domain.BaseDomain;
+import com.cutty.bravo.core.security.domain.Role;
 
 /**
  * 
@@ -57,6 +58,7 @@ public class HadoopCluster extends BaseDomain {
 	private String comments;
 	private Set<HadoopNode> dataNodes;
 	private List<ConfigFile> configFiles;
+	private Set<Role> roles;
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -104,6 +106,17 @@ public class HadoopCluster extends BaseDomain {
 
 	public void setDataNodes(Set<HadoopNode> dataNodes) {
 		this.dataNodes = dataNodes;
+	}
+	
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@JoinTable(name = "focus_cluster_role", joinColumns = { @JoinColumn(name = "cluster_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	@OneToMany(mappedBy = "hadoopCluster", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = ConfigFile.class) 

@@ -29,7 +29,15 @@
 			         <a href=\'javascript:gridOpenNewWin(\\"./hadoopNode!view.action?id=@{rowValue.id?c}\\",\\"查看节点[@{rowValue.name}]\\",\\"hadoopNode_Grid\\")\' style=\\"TEXT-DECORATION:none\\"><span style=color:red;>查看</span></a>
 			     </@bravo.Column>			   
 			</@bravo.GridPanel>
-
+			<@bravo.GridPanel title="相关角色列表" tbar="userRoleToolBar" name="clusterRoleGrid" dataProxy="./hadoopCluster!findRoleAndRendJsonData.action?id=%{formValue.id?c}"  contextDataName="Roles">
+				<@bravo.Toolbar name="userRoleToolBar" valign="top">	
+					<@bravo.M2MSelectButton text="选择添加角色" iconCls="add" targetProxy="../security/role!query.action" targetGridName="Role_Grid" originGridName="clusterRoleGrid" entityName="HadoopCluster" fieldName="roles" entityId="%{formValue.id?c}"/>
+					<@bravo.M2MRemoveButton text="删除角色" iconCls="delete" originGridName="clusterRoleGrid" entityName="HadoopCluster" fieldName="roles" entityId="%{formValue.id?c}"/>
+				</@bravo.Toolbar>			  
+				<@bravo.Column  hidden="true" name="id" header="ID" width="10"  sortable="true" />
+				<@bravo.Column name="name" header="名称" width="100" sortable="true" />
+				<@bravo.Column name="comments" header="备注" width="400"  sortable="true"/>
+			</@bravo.GridPanel>
 <#list existConfigFiles as existConfigFile>
 
 			<@bravo.GridPanel title="配置[${existConfigFile.configFileTemplate.name}]" tbar="configFileToolBar_${existConfigFile_index}" name="configFileGrid_${existConfigFile_index}" dataProxy="./user!findAndRendJsonData.action?roles.id=%{formValue.id?c}"  contextDataName="Users">
