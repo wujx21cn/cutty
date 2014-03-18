@@ -267,4 +267,11 @@ version="2.0">
     <dynamic-attributes>true</dynamic-attributes>  
   </tag>
   
+  
+  <tag>
+    <name>Html</name>
+    <tag-class>com.cutty.bravo.core.ui.tags.container.Html</tag-class> 
+    <dynamic-attributes>true</dynamic-attributes>  
+  </tag>
+  
 </taglib>

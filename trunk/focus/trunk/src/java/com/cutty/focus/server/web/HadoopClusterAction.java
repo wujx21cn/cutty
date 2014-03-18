@@ -25,11 +25,15 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 
 import com.cutty.bravo.components.common.domain.Enumeration;
+import com.cutty.bravo.core.dao.support.Page;
+import com.cutty.bravo.core.dao.support.QueryParameterWrapper;
+import com.cutty.bravo.core.security.domain.Role;
 import com.cutty.bravo.core.web.struts2.EntityAction;
 import com.cutty.focus.server.domain.ConfigFile;
 import com.cutty.focus.server.domain.ConfigFileTemplate;
 import com.cutty.focus.server.domain.HadoopCluster;
 import com.cutty.focus.server.domain.HadoopNode;
+import com.cutty.focus.server.manager.HadoopClusterManager;
 
 /**
  *
@@ -43,6 +47,7 @@ import com.cutty.focus.server.domain.HadoopNode;
 @Namespace("/server")
 @ParentPackage("bravo")
 public class HadoopClusterAction extends EntityAction<HadoopCluster> {
+	private HadoopClusterManager hadoopClusterManager;
 	private static final long serialVersionUID = 1L;
 	
 	public String getClusterNodeList() throws Exception{
@@ -101,5 +106,24 @@ public class HadoopClusterAction extends EntityAction<HadoopCluster> {
 		 }
 		 return toBeAddedFileTemplates;
     }
+    
+
+    /**
+     * 根据查询实体自动查询,并把处理结果以json格式返回
+     * @return
+     * @throws Exception
+     */
+    public String findRoleAndRendJsonData() throws Exception {
+    	List<Role> roles = hadoopClusterManager.getByRolesByHadoopClusterId(model.getId());
+    	Page page = new Page(0,roles.size(), 10000,roles);
+		renderContextForFind(page);
+    	return "jsonDataRenderChain";
+    }
+
+	public void setHadoopClusterManager(HadoopClusterManager hadoopClusterManager) {
+		this.hadoopClusterManager = hadoopClusterManager;
+	}
+    
+    
 }
 
