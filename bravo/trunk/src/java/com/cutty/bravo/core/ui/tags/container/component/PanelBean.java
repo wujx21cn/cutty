@@ -67,6 +67,7 @@ public class PanelBean extends Container{
 	//Jason Wu 2008-11-08
 	//使该控件在viewPort的layout=border的布局下可以使实现拖拉（继承于Panel的子类控件，例如TablePanel,FormPanel,TreePanel,FieldSet,GridPanel.....皆可）
 	private String split; 
+	private String expand; 
 	
 	//扩展属性，所有BUTTON组件均注册到该属性中。
 	private List<String> childButtonNames = new ArrayList<String>();
@@ -524,6 +525,12 @@ public class PanelBean extends Container{
 	}
 	public void setSplit(String split) {
 		this.split = split;
+	}
+	public String getExpand() {
+		return expand;
+	}
+	public void setExpand(String expand) {
+		this.expand = expand;
 	} 
 	
 	
