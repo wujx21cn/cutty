@@ -34,7 +34,7 @@
 		<@bravo.Panel      title="快捷菜单"                region="west"              border="false" draggable="false" autoLoad="../common/profileMenu!viewProfileMenu.action"/>
 		<@bravo.TreePanel  title="工作导航" text="工作导航" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10003" />
 		<@bravo.TreePanel  title="Hadoop集群管理" text="Hadoop集群管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10002" />
-		<@bravo.TreePanel  title="Hadoop文件管理" name="hadoopFileTreePanel" text="Hadoop文件管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../hdfs/filesTree!getClusterTree.action" contextData="treeData"  nodeId="10007" />
+		<@bravo.TreePanel  title="Hadoop文件管理" name="hadoopFileTreePanel" text="Hadoop文件管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../hdfs/fileExplorer!getClusterTree.action" contextData="treeData"  nodeId="10007" />
 		<@bravo.TreePanel  title="系统管理" text="系统管理" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10001" />
 		<@bravo.TreePanel  title="数据统计" text="数据统计" region="west" innerHtml="" border="false" draggable="false" margins="0 0 0 5" dataProxy="../common/menuFunction!viewTree.action" contextData="treeData" nodeId="10004" />
     </@bravo.Panel>
