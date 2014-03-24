@@ -20,6 +20,8 @@
 	<script type='text/javascript' src='${bravoHome}/${extjsWidgetPath}/ux/Ext.ux.LocationBar.js'></script>  
 	<link rel="stylesheet" type="text/css" href="${bravoHome}/${extjsWidgetPath}/ux/LocationBar.css" /> 
 	<script type='text/javascript' src='${bravoHome}/${extjsWidgetPath}/ux/ext-statusbar.js'></script>  
+	<script type='text/javascript' src='${bravoHome}/${extjsWidgetPath}/ux/ext-editarea-adapter.js'></script>  
+	
 	
 </head>    
     <body> 
@@ -30,9 +32,12 @@
     </body>
 </html>
 <script language="javascript">
+
+
 var datastore;
+
+
 function chDir( directory, loadGridOnly ) {
-		alert("chDir"+directory);
     	if( datastore.directory.replace( /\//g, '' ) == directory.replace( /\//g, '' )
     		&& datastore.getTotalCount() > 0 && directory != '') {
     		// Prevent double loading
@@ -41,7 +46,7 @@ function chDir( directory, loadGridOnly ) {
     	datastore.directory = directory;
     	var conn = datastore.proxy.getConnection();
     	if( directory == '' || conn && !conn.isLoading()) {
-    		datastore.load({params:{start:0, limit:150, dir: directory, option:'com_extplorer', action:'getdircontents', sendWhat: datastore.sendWhat }});
+    		datastore.load({params:{start:0, limit:150, dir: directory, contextDataName:'filesGridDate', getjsonDircontents:'Y', sendWhat: datastore.sendWhat }});
     	}
 		/*
 		Ext.Ajax.request({
@@ -73,12 +78,190 @@ Ext.onReady(
     Ext.QuickTips.init();
     Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 
+function getRequestParams() {
+	var selitems, dir, node;
+	var  selectedRows= fileGridPanel.getSelectionModel().getSelections();
+	if( selectedRows.length < 1 ) {		
+		node = parent.Ext.getCmp("hadoopFileTreePanel").getSelectionModel().getSelectedNode();
+		if( node ) {
+			var dir = parent.Ext.getCmp("hadoopFileTreePanel").getSelectionModel().getSelectedNode().id.replace( /_RRR_/g, '/' );
+			var lastSlash = dir.lastIndexOf( '/' );
+			if( lastSlash > 0 ) {
+				selitems = Array( dir.substring(lastSlash+1) );
+			} else {
+				selitems = Array( dir );
+			}
+		} else {
+			selitems = {};
+		}
+		dir = datastore.directory.substring( 0, datastore.directory.lastIndexOf('/'));
+	} else {
+		selitems = Array(selectedRows.length);
+
+		if( selectedRows.length > 0 ) {
+			for( i=0; i < selectedRows.length;i++) {
+				selitems[i] = selectedRows[i].get('name');
+			}
+		}
+		dir = datastore.directory;
+	}
+	//Ext.Msg.alert("Debug", dir );
+	var requestParams = {
+		option: 'com_extplorer',
+		dir: dir,
+		item: selitems.length > 0 ? selitems[0]:'',
+		'selitems[]': selitems
+	};
+	return requestParams;
+}
+
+function openActionDialog( caller, action ) {
+	var dialog;
+	var selectedRows = fileGridPanel.getSelectionModel().getSelections();
+	if( selectedRows.length < 1 ) {
+		var selectedNode = parent.Ext.getCmp("hadoopFileTreePanel").getSelectionModel().getSelectedNode();
+		if( selectedNode ) {
+			selectedRows = Array(  parent.Ext.getCmp("hadoopFileTreePanel").getSelectionModel().getSelectedNode().id.replace( /_RRR_/g, '/' ) );
+		}
+	}
+	
+	var dontNeedSelection = { mkitem:1, get_about:1, ftp_authentication:1, upload:1, search:1, admin:1, ssh2_authentication: 1, extplorer_authentication: 1 };
+	if( dontNeedSelection[action] == null  && selectedRows.length < 1 ) {
+		Ext.Msg.alert( 'okokookokokokokokooko');
+		return false;
+	}
+	switch( action ) {
+		case 'admin':
+		case 'archive':
+		case 'chmod':
+		case 'copy':
+		case 'edit':
+		case 'extplorer_authentication':
+		case 'ftp_authentication':
+		case 'ssh2_authentication':
+		case 'get_about':
+		case 'mkitem':
+		case 'move':
+		case 'rename':
+		case 'search':
+		case 'upload':
+		case 'view':
+		case 'diff':
+		case 'move':
+
+			requestParams = getRequestParams();
+			requestParams.operation = action;
+			requestParams.getActionJsonContents="Y";
+			requestParams.contextDataName="ActionJsonData";
+			if( action != "edit" ) {
+            	dialog = new Ext.Window( {
+            		id: "dialog",
+                    autoCreate: true,
+                    modal:true,
+                    width:600,
+                    height:400,
+                    shadow:true,
+                    minWidth:300,
+                    minHeight:200,
+                    proxyDrag: true,
+                    resizable: true,
+                    renderTo: Ext.getBody(),
+                    keys: {
+					    key: 27,
+					    fn  : function(){
+	                        dialog.hide();
+	                    }
+					},
+					title: 'fuck you'
+                   
+            	});			
+			}
+			Ext.Ajax.request( { url: './fileExplorer!openActionDialog.action',
+								params: Ext.urlEncode( requestParams ),
+								scripts: true,
+								callback: function(oElement, bSuccess, oResponse) {
+											if( !bSuccess ) {
+												msgbox = Ext.Msg.alert( "Ajax communication failure!");
+												msgbox.setIcon( Ext.MessageBox.ERROR );
+											}
+											if( oResponse && oResponse.responseText ) {
+												try{ json = Ext.decode( oResponse.responseText );
+													if( json.error && typeof json.error != 'xml' ) {
+														Ext.Msg.alert( "okokookokokokokokooko", json.error );
+														dialog.destroy();
+														return false;
+													}
+												} catch(e) {
+													msgbox = Ext.Msg.alert( "okokookokokokokokooko", "JSON Decode Error: " + e.message );
+													msgbox.setIcon( Ext.MessageBox.ERROR );
+													return false; 
+												}
+												if( action == "edit" ) {
+													Ext.getCmp("mainpanel").add(json);
+													Ext.getCmp("mainpanel").activate(json.id);
+												}
+												else {
+													dialog.add(json);
+													if( json.dialogtitle ) {
+														dialog.setTitle(json.dialogtitle);
+													}
+
+													try {
+														dialog.doLayout();
+														firstComponent = dialog.getComponent(0);
+														newWidth = firstComponent.getWidth() + dialog.getFrameWidth();
+														newHeight = firstComponent.getHeight() + dialog.getFrameHeight();
+														dialog.setSize( newWidth, newHeight );
+														
+													} catch(e) {}
+													//alert( "Before: Dialog.width: " + dialog.getWidth() + ", Client Width: "+ Ext.getBody().getWidth());
+													if( dialog.getWidth() >= Ext.getBody().getWidth() ) {
+														dialog.setWidth( Ext.getBody().getWidth() * 0.8 );
+													}
+													//alert( "After: Dialog.width: " + dialog.getWidth() + ", Client Width: "+ Ext.getBody().getWidth());
+													if( dialog.getHeight() >= Ext.getBody().getHeight() ) {
+														dialog.setHeight( Ext.getBody().getHeight() * 0.7 );
+													} else if( dialog.getHeight() < Ext.getBody().getHeight() * 0.3 ) {
+														dialog.setHeight( Ext.getBody().getHeight() * 0.5 );
+													}
+
+													// recalculate Window size
+													dialog.syncSize();
+													// center the window
+													dialog.center();
+												}
+											} else if( !response || !oResponse.responseText) {
+												msgbox = Ext.Msg.alert( "okokookokokokokokooko", "Received an empty response");
+												msgbox.setIcon( Ext.MessageBox.ERROR );
+
+											}
+										}
+							});
+            
+			if( action != "edit" ) {
+            	dialog.on( 'hide', function() { dialog.destroy(true); } );
+            	dialog.show();
+            }
+            break;
+
+		case 'delete':
+			var num = selectedRows.length;
+			Ext.Msg.confirm('okokookokokokokokooko', String.format("okokookokokokokokooko", num ), deleteFiles);
+			break;
+		case 'extract':
+			Ext.Msg.confirm('okokookokokokokokooko', "okokookokokokokokooko", extractArchive);
+			break;
+		case 'download':
+			document.location = 'okokookokokokokokooko?option=com_extplorer&operation=download&item='+ encodeURIComponent(fileGridPanel.getSelectionModel().getSelected().get('name')) + '&dir=' + encodeURIComponent( datastore.directory );
+			break;
+	}
+}
 
     datastore = new Ext.data.Store({
         proxy: new Ext.data.HttpProxy({
             url: "../hdfs/fileExplorer!listFiles.action",
             directory: "/",
-            params:{start:0, limit:150, dir: this.directory, option:"com_extplorer", action:"getdircontents" }
+            params:{start:0, limit:150, dir: this.directory, contextDataName:"filesGridDate", getjsonDircontents:"Y" }
         }),
 		directory: "/",
 		sendWhat: "both",
@@ -112,8 +295,8 @@ Ext.onReady(
     
     datastore.on("beforeload", function(ds, options) {
     								options.params.dir = options.params.dir ? options.params.dir : ds.directory;
-    								options.params.option = "com_extplorer";
-    								options.params.action = "getdircontents";
+    								options.params.contextDataName = "filesGridDate";
+    								options.params.getjsonDircontents = "Y";
     								options.params.sendWhat = datastore.sendWhat;    								
     								}
     							 );
@@ -143,7 +326,7 @@ Ext.onReady(
                               	text: '刷新',
                             	tooltip: '刷新',
                               	cls:'x-btn-text-icon',
-                              	handler: function() {alert('okok') }
+                              	handler: loadDir
                             },
                            {
                               		xtype: "tbbutton",
@@ -152,7 +335,7 @@ Ext.onReady(
                               		text: '搜索',
                               		tooltip: '搜索',
                               		cls:'x-btn-text-icon',
-                              		handler: function() {alert('okok') ; }
+                              		handler: function() { openActionDialog(this, 'search'); }
                               	},
                                                         '-',
                             {
@@ -162,7 +345,7 @@ Ext.onReady(
                               		tooltip: 'New File/Directory',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') ; }
+                              		handler: function() { openActionDialog(this, 'mkitem'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -171,7 +354,7 @@ Ext.onReady(
                               		tooltip: '编辑',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') ; }
+                              		handler: function() { openActionDialog(this, 'edit'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -180,7 +363,7 @@ Ext.onReady(
                               		tooltip: '复制',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'copy'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -189,7 +372,7 @@ Ext.onReady(
                               		tooltip: '移动',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'move'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -198,7 +381,7 @@ Ext.onReady(
                               		tooltip: '删除',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'delete'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -207,7 +390,7 @@ Ext.onReady(
                               		tooltip: '重命名',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'rename'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -216,7 +399,7 @@ Ext.onReady(
                               		tooltip: '改变 (chmod) 权限 (目录/文件)',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler:function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'chmod'); }
                               	},
                               	'-',
                               	{
@@ -225,7 +408,7 @@ Ext.onReady(
                               		icon: '../images/hadoop/_view.png',
                               		tooltip: '查看',
                               		cls:'x-btn-icon',
-                              		handler:function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'view'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -234,7 +417,7 @@ Ext.onReady(
                               		tooltip: 'difflink',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') }
+                              		handler: function() { openActionDialog(this, 'diff'); }
                               	},
                               	{
                               		xtype: "tbbutton",
@@ -243,7 +426,7 @@ Ext.onReady(
                               		tooltip: '下载',
                               		cls:'x-btn-icon',
                               		disabled: false,
-                              		handler: function() {alert('okok') }
+                              		handler: function() { openActionDialog(this,'download'); }
                               	},
                               	'-',
                               	{
@@ -254,10 +437,10 @@ Ext.onReady(
                               		cls:'x-btn-icon',
                               		disabled: false,
                               		handler: function() { 
-                                  		Ext.ux.OnDemandLoad.load("http://localhost/extplorer/scripts/extjs3-ext/ux.swfupload/SwfUploadPanel.css");
-                              			Ext.ux.OnDemandLoad.load("http://localhost/extplorer/scripts/extjs3-ext/ux.swfupload/SwfUpload.js" );
-                              			Ext.ux.OnDemandLoad.load("http://localhost/extplorer/scripts/extjs3-ext/ux.swfupload/SwfUploadPanel.js",
-                              		    	function(options) { alert( 'upload'); }); 
+                                  		Ext.ux.OnDemandLoad.load("${bravoHome}/${extjsWidgetPath}/ux/SwfUploadPanel.css");
+                              			Ext.ux.OnDemandLoad.load("${bravoHome}/${extjsWidgetPath}/ux/SwfUpload.js" );
+                              			Ext.ux.OnDemandLoad.load("${bravoHome}/${extjsWidgetPath}/ux/SwfUploadPanel.js",
+                              		    	function(options) { openActionDialog(this, 'upload'); }); 
                           		    }
                               	},
                               	{
@@ -266,14 +449,14 @@ Ext.onReady(
                               		icon: '../images/hadoop/_archive.png',
                               		tooltip: '压缩',
                           			cls:'x-btn-icon',
-                          			handler: function() {alert('okok') }
+                          			handler: function() { openActionDialog(this, 'archive'); }
                           			                              	},{
                               		xtype: "tbbutton",
                              		id: 'tb_extract',
                               		icon: '../images/hadoop/_extract.gif',
                               		tooltip: '解压缩',
                               		cls:'x-btn-icon',
-                          			                              		handler:function() {alert('okok') }
+                          			handler: function() { openActionDialog(this, 'extract'); }
                           			                          		},
                               	'-',
                           					
@@ -437,7 +620,7 @@ Ext.onReady(
 
     // trigger the data store load
     function loadDir() {
-    	datastore.load({params:{start:0, limit:150, dir: datastore.directory, option:'com_extplorer', action:'getdircontents', sendWhat: datastore.sendWhat }});
+    	datastore.load({params:{start:0, limit:150, dir: datastore.directory, contextDataName:'filesGridDate', getjsonDircontents:'Y', sendWhat: datastore.sendWhat }});
     }
    
     
@@ -447,7 +630,7 @@ Ext.onReady(
     	} else {
     		e = f;
     	}
-    	gsm = ext_itemgrid.getSelectionModel();
+    	gsm = fileGridPanel.getSelectionModel();
     	gsm.clickedRow = rowIndex;
     	var selections = gsm.getSelections();
     	if( selections.length > 1 ) {
@@ -696,7 +879,7 @@ Ext.onReady(
 		Ext.get('status').hide();
 	} catch(e) {}
 	
-	var fileGridPanel = new Ext.grid.GridPanel({
+	var fileGridPanel = new Ext.grid.EditorGridPanel({
 					xtype: "editorgrid",
 		        	region: "center",
 		            title: "目录",
@@ -789,6 +972,7 @@ var Viewport16334478 = new Ext.Viewport({
 	,layout:'border' ,
 	listeners: {
 		 'afterlayout': { fn: function(){
+	        ext_itemgrid = Ext.getCmp("gridpanel");
 			 var hadoopFileTreePanel = parent.Ext.getCmp('hadoopFileTreePanel');  
 			 if(hadoopFileTreePanel!=undefined){
 							locbar = Ext.getCmp("locationbarcmp");
